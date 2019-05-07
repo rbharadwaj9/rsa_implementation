@@ -3,8 +3,9 @@ b = int(input("Enter b "))
 n = int(input("Enter n "))
 
 def mod(b,n):
+    print("B is: ", b)
     lowerLevel = 1;
-    while(b > 2):
+    while(b > n):
         if b % 2 == 0:  #even
             lowerLevel = mod((b/2),n)
         else:  #odd
@@ -13,7 +14,8 @@ def mod(b,n):
     return modulus
 
 def main():
-    mod(b,n)
+    answer = mod(b,n)
+    print(answer)
 
 if __name__ == '__main__':
     main()
