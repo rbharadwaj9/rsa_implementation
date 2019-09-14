@@ -1,21 +1,30 @@
+import math
+
 print("a = b (mod n)")
 b = int(input("Enter b "))
 n = int(input("Enter n "))
 
-def mod(b,n):
+
+def mod(b, n):
     print("B is: ", b)
-    lowerLevel = 1;
+    lower_level = 1
     while(b > n):
-        if b % 2 == 0:  #even
-            lowerLevel = mod((b/2),n)
-        else:  #odd
-            lowerLevel = mod(((b-1)/2),n) * (b%n)
-    modulus = (lowerLevel ** 2) % n
-    return modulus
+        nearest_perfect_square = math.floor(b**(1/2))
+        if (b ** (1/2)) == nearest_perfect_square:  # Perfect Square
+            lower_level = mod(nearest_perfect_square, n)
+        else:  # odd
+            square_difference = b - nearest_perfect_square
+            lower_level = mod(nearest_perfect_square, n) * \
+                mod(square_difference, n)
+    while (b > n):
+        b = (b - n)
+    return b
+
 
 def main():
-    answer = mod(b,n)
+    answer = mod(b, n)
     print(answer)
+
 
 if __name__ == '__main__':
     main()
